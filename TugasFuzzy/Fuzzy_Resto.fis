@@ -1,0 +1,68 @@
+[System]
+Name='Fuzzy_Resto'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=3
+NumRules=8
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='rasa'
+Range=[0 10]
+NumMFs=2
+MF1='b aja':'trimf',[-4 0 7]
+MF2='enak':'trimf',[3 10 14]
+
+[Input2]
+Name='harga'
+Range=[0 10]
+NumMFs=3
+MF1='Mahal':'trimf',[-4 0 4]
+MF2='Standar':'trimf',[1 5 9]
+MF3='Murah':'trimf',[6 10 14]
+
+
+[Input3]
+Name='Tempat'
+Range=[0 10]
+NumMFs=3
+MF1='tidakBersih':'gaussmf',[1.699 0]
+MF2='Bersih':'gaussmf',[1.699 5]
+MF3='sangatBersih':'gaussmf',[1.699 10]
+
+[Output1]
+Name='tambahPesanan'
+Range=[0 30]
+NumMFs=3
+MF1='tidak':'trimf',[0 5 10]
+MF2='tambahMinum':'trimf',[10 15 20]
+MF3='ya':'trimf',[20 25 30]
+
+[Output2]
+Name='takeAway'
+Range=[0 10]
+NumMFs=2
+MF1='tidak':'trimf',[-4 0 4]
+MF2='ya':'trimf',[6 10 14]
+
+[Output3]
+Name='datangKembali'
+Range=[0 10]
+NumMFs=2
+MF1='Tidak':'trimf',[-4 0 3]
+MF2='Ya':'trimf',[7 10 14]
+
+[Rules]
+2 3 0, 3 0 0 (1) : 1
+0 3 3, 0 0 2 (1) : 1
+2 0 3, 0 2 0 (1) : 1
+0 1 2, 0 2 0 (1) : 2
+1 3 3, 2 1 2 (1) : 2
+1 2 0, 2 0 0 (1) : 1
+1 1 0, 1 0 1 (1) : 1
+2 1 0, 2 0 2 (1) : 2
